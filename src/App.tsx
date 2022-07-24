@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from 'react'
+import { ThemeProvider } from 'styled-components';
 import './App.css';
+import Sidebar from './components/Sidebar/Sidebar';
+import { useDarkMode } from './hooks/useDarkMode';
+import { GlobalStyles } from './theming/global';
+import { darkTheme, lightTheme } from './theming/theme';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [theme, toggleTheme, componentMounted] = useDarkMode();
+    const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+    if (!componentMounted) {
+        return <div />
+    }
+
+    return (
+        <ThemeProvider theme={darkTheme}>
+            <GlobalStyles />
+            <Sidebar />
+            <div className="content"></div>
+        </ThemeProvider>
+    )
 }
 
 export default App;
