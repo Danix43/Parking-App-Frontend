@@ -3,6 +3,8 @@ export const lightTheme = {
   text: "#363537",
   toggleBorder: "#FFF",
   gradient: "linear-gradient(#39598A, #79D7ED)",
+
+  logoColor: "#121212",
 };
 
 export const darkTheme = {
@@ -11,5 +13,7 @@ export const darkTheme = {
   toggleBorder: "#6B8096",
   gradient: "linear-gradient(#091236, #1E215D)",
 
-  sidebarColor: "#172439",
+  elevation1Color: "#172439",
+
+  logoColor: "#FAFAFA",
 };

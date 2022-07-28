@@ -1,15 +1,46 @@
-import React from "react";
+import React, { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 import "./Button.css";
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  
+  margin: .25rem;
+
+  padding-left: .3rem;
+  padding-right: .3rem;
+  
+  border-radius: 15px;
+  
+  &:hover {
+    background-color: ${props => props.theme.body};
+  }
+`;
+
+const Text = styled.p`
+  margin-left: 1rem;
+`;
 
 type ButtonProps = {
   text: string;
-  link: string;
+  onClick: Function;
+  img: React.ReactElement;
 };
 
-function Button({ text, link }: ButtonProps) {
-  return (<div className="buttonContainer">
-    <p className="buttonText">{text}</p>
-  </div>);
+function Button({ text, onClick, img }: ButtonProps) {
+  const themeContext = useContext(ThemeContext);
+
+  const handleClick = () => {
+    onClick();
+  };
+
+  return (
+    <ButtonContainer onClick={handleClick} theme={themeContext}>
+      {img}
+      <Text>{text}</Text>
+    </ButtonContainer>
+  );
 }
 
 export default Button;
