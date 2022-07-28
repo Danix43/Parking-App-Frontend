@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
-import "./Button.css";
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -31,7 +30,7 @@ type ButtonProps = {
 function Button({ text, onClick, img }: ButtonProps) {
   const themeContext = useContext(ThemeContext);
 
-  const handleClick = () => {
+  const handleClick = (clickEvent: any) => {
     onClick();
   };
 
