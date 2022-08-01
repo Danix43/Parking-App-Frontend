@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
 import styled, { ThemeProvider } from 'styled-components';
 import './App.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import Button from './components/Button/Button';
 import { useDarkMode } from './hooks/useDarkMode';
 import { GlobalStyles } from './theming/global';
@@ -14,6 +15,8 @@ import { ReactComponent as AltListLogo } from './theming/icons/used_spots_icon.s
 import { ReactComponent as SearchSpotLogo } from './theming/icons/search_a_spot_icon.svg';
 import { ReactComponent as AddSpotLogo } from './theming/icons/add_spot_icon.svg';
 import { ReactComponent as DeleteSpotLogo } from './theming/icons/delete_spot_icon.svg';
+import SeeAllSpotsContainer from './components/SeeAllSpotsWindow/SeeAllSpotsWindow';
+import DefaultWindow from './components/DefaultWindow/DefaultWindow';
 
 
 const SidebarRoot = styled.div`
@@ -64,13 +67,25 @@ const ContentContainer = styled.div`
     background-color: ${props => props.theme.elevation1Color};
 `;
 
-const openSeeAllSpotsDialog = (word = "default") => {
-    console.log("word = " + word);
-};
 
 function App() {
     const [theme, toggleTheme, componentMounted] = useDarkMode();
     const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+    const [currentContentWindow, setCurrentContentWindow] = useState(<DefaultWindow />);
+
+    const switchCurrentContentWindow = (word = "default") => {
+        switch (word) {
+            case "seeAllSpots": {
+                setCurrentContentWindow(<SeeAllSpotsContainer />);
+                break;
+            }
+            case "default": {
+                setCurrentContentWindow(<DefaultWindow />);
+                break;
+            }
+        }
+    };
 
     if (!componentMounted) {
         return <div />
@@ -86,18 +101,19 @@ function App() {
                 </LogoContainer>
 
                 <ButtonContainer>
-                    <Button text="See all the spots" onClick={() => openSeeAllSpotsDialog("test")} img={<ListLogo color="white" height="48" width="40" />}></Button>
-                    <Button text="See all the used spots" onClick={openSeeAllSpotsDialog} img={<AltListLogo color="white" height="48" width="40" />}></Button>
-                    <Button text="See the status of a spot" onClick={openSeeAllSpotsDialog} img={<SearchSpotLogo color="white" height="48" width="40" />}></Button>
-                    <Button text="Add a new spot" onClick={openSeeAllSpotsDialog} img={<AddSpotLogo color="white" height="48" width="40" />}></Button>
-                    <Button text="Delete an existing spot" onClick={openSeeAllSpotsDialog} img={<DeleteSpotLogo color="white" height="48" width="40" />}></Button>
+                    <Button text="Start menu" onClick={() => switchCurrentContentWindow("default")} img={<ListLogo color="white" height="48" width="40" />}></Button>
+                    <Button text="See all the spots" onClick={() => switchCurrentContentWindow("seeAllSpots")} img={<ListLogo color="white" height="48" width="40" />}></Button>
+                    <Button text="See all the used spots" onClick={() => switchCurrentContentWindow("seeAllUsedSpots")} img={<AltListLogo color="white" height="48" width="40" />}></Button>
+                    <Button text="See the status of a spot" onClick={() => switchCurrentContentWindow("seeStatusSpot")} img={<SearchSpotLogo color="white" height="48" width="40" />}></Button>
+                    <Button text="Add a new spot" onClick={() => switchCurrentContentWindow("newSpot")} img={<AddSpotLogo color="white" height="48" width="40" />}></Button>
+                    <Button text="Delete an existing spot" onClick={() => switchCurrentContentWindow("deleteSpot")} img={<DeleteSpotLogo color="white" height="48" width="40" />}></Button>
                 </ButtonContainer>
             </SidebarRoot >
             <ContentContainer theme={themeMode}>
-
+                {currentContentWindow}
             </ContentContainer>
         </ThemeProvider>
-    )
+    );
 }
 
 export default App;

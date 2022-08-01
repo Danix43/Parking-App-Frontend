@@ -24,7 +24,7 @@ const Text = styled.p`
 type ButtonProps = {
   text: string;
   onClick: Function;
-  img: React.ReactElement;
+  img: React.ReactElement | null;
 };
 
 function Button({ text, onClick, img }: ButtonProps) {
