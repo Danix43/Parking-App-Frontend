@@ -1,10 +1,7 @@
 import React from 'react'
-import { Map as MapGl } from 'react-map-gl';
+import { Map as MapGl, Marker } from 'react-map-gl';
 import MAPBOX_API_KEY from '../../keys';
 
-const Marker = ({ text }: any) => {
-    return <div>{text}</div>;
-}
 
 type MapProps = {
     lat: number,
@@ -37,7 +34,10 @@ function Map({ lat, lng }: MapProps) {
             latitude={lat}
             mapStyle="mapbox://styles/mapbox/streets-v9"
             mapboxAccessToken={MAPBOX_API_KEY}
-        />
+        >
+            <Marker longitude={lng} latitude={lat}>
+            </Marker>
+        </MapGl>
     );
 }
 

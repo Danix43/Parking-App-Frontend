@@ -1,8 +1,27 @@
-const sampleDataGetAll = [
+export type User = {
+  id: number | undefined;
+  name: string | undefined;
+  balance: number | undefined;
+};
+
+export type ParkingSpot = {
+  id: number;
+  isUsed: boolean;
+  currentUser: User;
+  locationName: string;
+  longitude: number;
+  latitude: number;
+};
+
+export const sampleDataGetAll: ParkingSpot[] = [
   {
     id: 1,
     isUsed: false,
-    currentUser: null,
+    currentUser: {
+      id: undefined,
+      name: undefined,
+      balance: undefined,
+    },
     locationName: "location 1",
     longitude: 23.544123,
     latitude: 24.6546456,

@@ -15,8 +15,10 @@ import { ReactComponent as AltListLogo } from './theming/icons/used_spots_icon.s
 import { ReactComponent as SearchSpotLogo } from './theming/icons/search_a_spot_icon.svg';
 import { ReactComponent as AddSpotLogo } from './theming/icons/add_spot_icon.svg';
 import { ReactComponent as DeleteSpotLogo } from './theming/icons/delete_spot_icon.svg';
-import SeeAllSpotsContainer from './components/SeeAllSpotsWindow/SeeAllSpotsWindow';
+
 import DefaultWindow from './components/DefaultWindow/DefaultWindow';
+import SeeUsedSpotsWindow from './components/SeeUsedSpotsWindow/SeeUsedSpotsWindow';
+import SeeAllSpotsWindow from './components/SeeAllSpotsWindow/SeeAllSpotsWindow';
 
 
 const SidebarRoot = styled.div`
@@ -77,10 +79,17 @@ function App() {
     const switchCurrentContentWindow = (word = "default") => {
         switch (word) {
             case "seeAllSpots": {
-                setCurrentContentWindow(<SeeAllSpotsContainer />);
+                setCurrentContentWindow(<></>);
+                setCurrentContentWindow(<SeeAllSpotsWindow />);
+                break;
+            }
+            case "seeAllOcupiedSpots": {
+                setCurrentContentWindow(<></>);
+                setCurrentContentWindow(<SeeUsedSpotsWindow />);
                 break;
             }
             case "default": {
+                setCurrentContentWindow(<></>);
                 setCurrentContentWindow(<DefaultWindow />);
                 break;
             }
@@ -103,7 +112,7 @@ function App() {
                 <ButtonContainer>
                     <Button text="Start menu" onClick={() => switchCurrentContentWindow("default")} img={<ListLogo color="white" height="48" width="40" />}></Button>
                     <Button text="See all the spots" onClick={() => switchCurrentContentWindow("seeAllSpots")} img={<ListLogo color="white" height="48" width="40" />}></Button>
-                    <Button text="See all the used spots" onClick={() => switchCurrentContentWindow("seeAllUsedSpots")} img={<AltListLogo color="white" height="48" width="40" />}></Button>
+                    <Button text="See all the used spots" onClick={() => switchCurrentContentWindow("seeAllOcupiedSpots")} img={<AltListLogo color="white" height="48" width="40" />}></Button>
                     <Button text="See the status of a spot" onClick={() => switchCurrentContentWindow("seeStatusSpot")} img={<SearchSpotLogo color="white" height="48" width="40" />}></Button>
                     <Button text="Add a new spot" onClick={() => switchCurrentContentWindow("newSpot")} img={<AddSpotLogo color="white" height="48" width="40" />}></Button>
                     <Button text="Delete an existing spot" onClick={() => switchCurrentContentWindow("deleteSpot")} img={<DeleteSpotLogo color="white" height="48" width="40" />}></Button>
