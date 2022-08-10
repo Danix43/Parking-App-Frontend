@@ -31,7 +31,7 @@ const MapContainer = styled.div`
     padding: 1rem;
 `;
 
-// TODO: - refactor code
+// TODO: refactor code
 function SeeSpotStatusWindow() {
     const [currentSpot, setCurrentSpot] = useState<ParkingSpot | null>(null);
     const [spotId, setSpotId] = useState('');
