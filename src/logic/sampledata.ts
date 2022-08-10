@@ -5,7 +5,7 @@ export type User = {
 };
 
 export type ParkingSpot = {
-  id: number;
+  id: string;
   isUsed: boolean;
   currentUser: User;
   locationName: string;
@@ -15,7 +15,7 @@ export type ParkingSpot = {
 
 export const sampleDataGetAll: ParkingSpot[] = [
   {
-    id: 1,
+    id: "1",
     isUsed: false,
     currentUser: {
       id: undefined,
@@ -27,7 +27,7 @@ export const sampleDataGetAll: ParkingSpot[] = [
     latitude: 24.6546456,
   },
   {
-    id: 2,
+    id: "2",
     isUsed: false,
     currentUser: {
       id: 2,
@@ -39,7 +39,7 @@ export const sampleDataGetAll: ParkingSpot[] = [
     latitude: 12.6546456,
   },
   {
-    id: 3,
+    id: "3",
     isUsed: true,
     currentUser: {
       id: 3,

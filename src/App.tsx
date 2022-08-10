@@ -19,6 +19,9 @@ import { ReactComponent as DeleteSpotLogo } from './theming/icons/delete_spot_ic
 import DefaultWindow from './components/DefaultWindow/DefaultWindow';
 import SeeUsedSpotsWindow from './components/SeeUsedSpotsWindow/SeeUsedSpotsWindow';
 import SeeAllSpotsWindow from './components/SeeAllSpotsWindow/SeeAllSpotsWindow';
+import SeeSpotStatusWindow from './components/SeeSpotStatusWindow/SeeSpotStatusWindow';
+import AddNewSpotWindow from './components/AddNewSpotWindow/AddNewSpotWindow';
+import DeleteSpotWindow from './components/DeleteSpotWindow/DeleteSpotWindow';
 
 
 const SidebarRoot = styled.div`
@@ -79,17 +82,26 @@ function App() {
     const switchCurrentContentWindow = (word = "default") => {
         switch (word) {
             case "seeAllSpots": {
-                setCurrentContentWindow(<></>);
                 setCurrentContentWindow(<SeeAllSpotsWindow />);
                 break;
             }
             case "seeAllOcupiedSpots": {
-                setCurrentContentWindow(<></>);
                 setCurrentContentWindow(<SeeUsedSpotsWindow />);
                 break;
             }
+            case "seeStatusSpot": {
+                setCurrentContentWindow(<SeeSpotStatusWindow />);
+                break;
+            }
+            case "newSpot": {
+                setCurrentContentWindow(<AddNewSpotWindow />);
+                break;
+            }
+            case "deleteSpot": {
+                setCurrentContentWindow(<DeleteSpotWindow />);
+                break;
+            }
             case "default": {
-                setCurrentContentWindow(<></>);
                 setCurrentContentWindow(<DefaultWindow />);
                 break;
             }

@@ -11,7 +11,7 @@ const BaseContainer = styled.div`
     flex-direction: row;
 
     height: 62rem;
-    `;
+`;
 
 const ListContainer = styled.li`
     display: flex;
@@ -19,7 +19,6 @@ const ListContainer = styled.li`
 
     border-right: 3px solid white;
     padding: 30px;
-
 `;
 
 const DataContainer = styled.div`
