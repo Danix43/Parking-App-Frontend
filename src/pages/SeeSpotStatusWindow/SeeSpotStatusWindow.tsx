@@ -1,9 +1,9 @@
+import LabelWithData from 'components/LabelWithData/LabelWithData';
+import Map from 'components/Map/Map';
+import { getSpotById } from 'logic/handling';
+import { ParkingSpot } from 'logic/sampledata';
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import { getSpotById } from '../../logic/handling';
-import { ParkingSpot } from '../../logic/sampledata';
-import LabelWithData from '../LabelWithData/LabelWithData';
-import Map from '../Map/Map';
 
 const BaseContainer = styled.div`
     display: flex;

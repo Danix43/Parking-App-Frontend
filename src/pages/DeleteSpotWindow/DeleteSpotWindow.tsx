@@ -1,10 +1,10 @@
+import Button from "components/Button/Button";
+import LabelWithData from "components/LabelWithData/LabelWithData";
+import Map from "components/Map/Map";
+import { getSpotById } from "logic/handling";
+import { ParkingSpot } from "logic/sampledata";
 import { useState } from "react";
 import styled from "styled-components";
-import { getSpotById } from "../../logic/handling";
-import { ParkingSpot } from "../../logic/sampledata";
-import Button from "../Button/Button";
-import LabelWithData from "../LabelWithData/LabelWithData";
-import Map from "../Map/Map";
 
 const BaseContainer = styled.div`
     display: flex;
@@ -64,7 +64,6 @@ function DeleteSpotWindow() {
         return (
             <>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                    {/* <h1 style={{ paddingLeft: "1rem" }}>Here are the details of the spot:</h1> */}
                     <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                         <DataContainer>
                             <LabelWithData labelTitle='ID' dataContent={`${spotDetails.id}`} />
@@ -79,7 +78,6 @@ function DeleteSpotWindow() {
                             }
                         </DataContainer>
                         <MapContainer>
-                            {/* <h1 style={{ textAlign: "center", justifySelf: "center" }}>Map</h1> */}
                             <Map lat={spotDetails.latitude} lng={spotDetails.longitude} />
                         </MapContainer>
                     </div>

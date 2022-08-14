@@ -1,17 +1,17 @@
+import Button from 'components/Button/Button';
+import LabelWithData from 'components/LabelWithData/LabelWithData';
+import Map from 'components/Map/Map';
+import { getSpotsData } from 'logic/requests';
+import { ParkingSpot } from 'logic/sampledata';
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import LabelWithData from '../LabelWithData/LabelWithData';
-import Button from '../Button/Button';
-import Map from '../Map/Map';
-import { getSpotsData } from '../../logic/requests';
-import { ParkingSpot } from '../../logic/sampledata';
 
 const BaseContainer = styled.div`
     display: flex;
     flex-direction: row;
 
     height: 62rem;
-    `;
+`;
 
 const ListContainer = styled.li`
     display: flex;
@@ -19,7 +19,6 @@ const ListContainer = styled.li`
 
     border-right: 3px solid white;
     padding: 30px;
-
 `;
 
 const DataContainer = styled.div`
@@ -36,8 +35,9 @@ const MapContainer = styled.div`
     padding: 1rem;
 `;
 
-function SeeUsedSpotsWindow() {
-    const [spotsData, setSpotsData] = useState(getSpotsData(true));
+
+function SeeAllSpotsWindow() {
+    const [spotsData, setSpotsData] = useState(getSpotsData(false));
     const [currentSpot, setCurrentSpot] = useState(spotsData[1] === undefined ? spotsData[0] : spotsData[1]);
 
     const spotsButtons = spotsData.map((spot: ParkingSpot) => createSpotButton(spot));
@@ -71,4 +71,4 @@ function SeeUsedSpotsWindow() {
         </BaseContainer >
     );
 }
-export default SeeUsedSpotsWindow;
+export default SeeAllSpotsWindow;

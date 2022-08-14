@@ -16,12 +16,12 @@ import { ReactComponent as SearchSpotLogo } from './theming/icons/search_a_spot_
 import { ReactComponent as AddSpotLogo } from './theming/icons/add_spot_icon.svg';
 import { ReactComponent as DeleteSpotLogo } from './theming/icons/delete_spot_icon.svg';
 
-import DefaultWindow from './components/DefaultWindow/DefaultWindow';
-import SeeUsedSpotsWindow from './components/SeeUsedSpotsWindow/SeeUsedSpotsWindow';
-import SeeAllSpotsWindow from './components/SeeAllSpotsWindow/SeeAllSpotsWindow';
-import SeeSpotStatusWindow from './components/SeeSpotStatusWindow/SeeSpotStatusWindow';
-import AddNewSpotWindow from './components/AddNewSpotWindow/AddNewSpotWindow';
-import DeleteSpotWindow from './components/DeleteSpotWindow/DeleteSpotWindow';
+import DefaultWindow from 'pages/DefaultWindow/DefaultWindow';
+import SeeUsedSpotsWindow from 'pages/SeeUsedSpotsWindow/SeeUsedSpotsWindow';
+import SeeAllSpotsWindow from 'pages/SeeAllSpotsWindow/SeeAllSpotsWindow';
+import SeeSpotStatusWindow from 'pages/SeeSpotStatusWindow/SeeSpotStatusWindow';
+import AddNewSpotWindow from 'pages/AddNewSpotWindow/AddNewSpotWindow';
+import DeleteSpotWindow from 'pages/DeleteSpotWindow/DeleteSpotWindow';
 
 
 const SidebarRoot = styled.div`

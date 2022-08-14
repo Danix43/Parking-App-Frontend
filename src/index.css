@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'Albert Sans';
-  src: url('./fonts/Albert_Sans/AlbertSans-VariableFont_wght.ttf');
+  src: url('theming/fonts/Albert_Sans/AlbertSans-VariableFont_wght.ttf');
 }
 
 @font-face {
   font-family: 'Ibarra Real Nova';
-  src: url('./fonts/Ibarra_Real_Nova/IbarraRealNova-VariableFont_wght.ttf');
+  src: url('theming/fonts/Ibarra_Real_Nova/IbarraRealNova-VariableFont_wght.ttf');
 }
 
 body {
