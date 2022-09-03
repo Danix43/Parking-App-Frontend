@@ -24,13 +24,13 @@ const Text = styled.p`
 type ButtonProps = {
   text: string;
   onClick: Function;
-  img: React.ReactElement | null;
+  img?: React.ReactElement | null;
 };
 
 function Button({ text, onClick, img }: ButtonProps) {
   const themeContext = useContext(ThemeContext);
 
-  const handleClick = (clickEvent: any) => {
+  const handleClick = (_clickEvent: any) => {
     onClick();
   };
 

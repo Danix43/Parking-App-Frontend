@@ -1,14 +1,15 @@
-import React from 'react'
-import { Map as MapGl, Marker } from 'react-map-gl';
+import React, { MouseEvent, useState } from 'react'
+import { Map as MapGl, MapLayerMouseEvent } from 'react-map-gl';
 import MAPBOX_API_KEY from '../../keys';
 
-
 type MapProps = {
-    lat: number,
-    lng: number,
+    lat?: number,
+    lng?: number,
+    Marker?: JSX.Element,
+    handleClickOnMap: Function,
 }
 
-function Map({ lat, lng }: MapProps) {
+function Map({ lat, lng, Marker, handleClickOnMap }: MapProps) {
     type MapDefaultPropTypes = {
         center: {
             lat: number,
@@ -22,21 +23,22 @@ function Map({ lat, lng }: MapProps) {
         zoom: 11
     };
 
+    const [viewState] = useState({
+        longitude: lng || defaultProps.center.lng,
+        latitude: lat || defaultProps.center.lat,
+        zoom: 10,
+    });
+
     return (
         <MapGl
-            initialViewState={{
-                latitude: lat,
-                longitude: lng,
-                zoom: defaultProps.zoom
-            }}
+            initialViewState={viewState}
             reuseMaps
-            longitude={lng}
-            latitude={lat}
             mapStyle="mapbox://styles/mapbox/streets-v9"
             mapboxAccessToken={MAPBOX_API_KEY}
-        >
-            <Marker longitude={lng} latitude={lat}>
-            </Marker>
+            onClick={(e: MapLayerMouseEvent) => {
+                handleClickOnMap(e);
+            }}>
+            {Marker}
         </MapGl>
     );
 }

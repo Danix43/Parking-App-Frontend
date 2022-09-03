@@ -1,6 +1,7 @@
 import Button from 'components/Button/Button';
 import LabelWithData from 'components/LabelWithData/LabelWithData';
 import Map from 'components/Map/Map';
+import Marker from 'components/Map/MapMarkers/Marker';
 import { getSpotsData } from 'logic/requests';
 import { ParkingSpot } from 'logic/sampledata';
 import React, { useState } from 'react'
@@ -36,10 +37,12 @@ const MapContainer = styled.div`
 `;
 
 function SeeUsedSpotsWindow() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [spotsData, setSpotsData] = useState(getSpotsData(true));
     const [currentSpot, setCurrentSpot] = useState(spotsData[1] === undefined ? spotsData[0] : spotsData[1]);
 
     const spotsButtons = spotsData.map((spot: ParkingSpot) => createSpotButton(spot));
+
     function createSpotButton(spot: any) {
         return (
             <Button key={spot.id} text={`Spot at ${spot.locationName}`} onClick={() => setCurrentSpot(spot)} img={null}></Button>
@@ -65,7 +68,13 @@ function SeeUsedSpotsWindow() {
             </DataContainer>
             <MapContainer>
                 <h1 style={{ textAlign: "center", justifySelf: "center" }}>Map</h1>
-                <Map lat={currentSpot.latitude} lng={currentSpot.longitude} />
+                <Map
+                    handleClickOnMap={() => { }}
+                    lat={currentSpot.latitude}
+                    lng={currentSpot.longitude}
+                    Marker={
+                        <Marker lat={currentSpot.latitude} lng={currentSpot.longitude} />
+                    } />
             </MapContainer>
         </BaseContainer >
     );

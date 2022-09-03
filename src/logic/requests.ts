@@ -9,3 +9,9 @@ export function getSpotsData(isUsed: boolean): ParkingSpot[] {
     return sampleDataGetAll;
   }
 }
+
+export function saveSpotOnDB(spotObj: ParkingSpot) {
+  console.log(`spot details: `);
+  console.log(spotObj);
+  console.log("spot saved");
+}

@@ -1,5 +1,6 @@
 import LabelWithData from 'components/LabelWithData/LabelWithData';
 import Map from 'components/Map/Map';
+import Marker from 'components/Map/MapMarkers/Marker';
 import { getSpotById } from 'logic/handling';
 import { ParkingSpot } from 'logic/sampledata';
 import React, { useState } from 'react'
@@ -59,16 +60,22 @@ function SeeSpotStatusWindow() {
                         <LabelWithData labelTitle='Is Used?' dataContent={`${spotDetails.isUsed ? "Yes" : "No"}`} />
                         <LabelWithData labelTitle='Located at' dataContent={`${spotDetails.locationName}`} />
                         <LabelWithData labelTitle='Located at (GPS Coords)' dataContent={`${spotDetails.longitude} / ${spotDetails.latitude}`} />
-                        {spotDetails.currentUser.id !== undefined ? (<>
-                            <LabelWithData labelTitle='Used By User ID' dataContent={`${spotDetails.currentUser?.id}`} />
-                            <LabelWithData labelTitle='Used By User' dataContent={`${spotDetails.currentUser?.name}`} />
-                            <LabelWithData labelTitle='Used By User with balance' dataContent={`${spotDetails.currentUser?.balance}`} />
+                        {spotDetails.currentUser !== undefined ? (<>
+                            <LabelWithData labelTitle='Used By User ID' dataContent={`${spotDetails.currentUser.id}`} />
+                            <LabelWithData labelTitle='Used By User' dataContent={`${spotDetails.currentUser.name}`} />
+                            <LabelWithData labelTitle='Used By User with balance' dataContent={`${spotDetails.currentUser.balance}`} />
                         </>) : null
                         }
                     </DataContainer>
                     <MapContainer>
                         {/* <h1 style={{ textAlign: "center", justifySelf: "center" }}>Map</h1> */}
-                        <Map lat={spotDetails.latitude} lng={spotDetails.longitude} />
+                        <Map
+                            handleClickOnMap={() => { }}
+                            lat={spotDetails.latitude}
+                            lng={spotDetails.longitude}
+                            Marker={
+                                <Marker lat={spotDetails.latitude} lng={spotDetails.longitude} />
+                            } />
                     </MapContainer>
                 </div>
             </>

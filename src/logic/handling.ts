@@ -1,6 +1,7 @@
+import { saveSpotOnDB } from "./requests";
 import { ParkingSpot } from "./sampledata";
 
-function getSpotById(id: string): ParkingSpot | null {
+export function getSpotById(id: string): ParkingSpot | null {
   const spot: ParkingSpot = {
     id: "1",
     isUsed: false,
@@ -21,4 +22,6 @@ function getSpotById(id: string): ParkingSpot | null {
   return null;
 }
 
-export { getSpotById };
+export function saveSpot(spotObj: ParkingSpot) {
+  saveSpotOnDB(spotObj);
+}

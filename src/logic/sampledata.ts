@@ -7,7 +7,7 @@ export type User = {
 export type ParkingSpot = {
   id: string;
   isUsed: boolean;
-  currentUser: User;
+  currentUser?: User;
   locationName: string;
   longitude: number;
   latitude: number;
