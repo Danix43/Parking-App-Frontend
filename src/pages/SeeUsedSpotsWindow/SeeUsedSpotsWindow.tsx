@@ -37,9 +37,12 @@ const MapContainer = styled.div`
 `;
 
 function SeeUsedSpotsWindow() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [spotsData, setSpotsData] = useState(getSpotsData(true));
     const [currentSpot, setCurrentSpot] = useState(spotsData[1] === undefined ? spotsData[0] : spotsData[1]);
+
+    // useEffect(() => {
+    //     setSpotsData(getSpotsData(true))
+    // }, [])
 
     const spotsButtons = spotsData.map((spot: ParkingSpot) => createSpotButton(spot));
 

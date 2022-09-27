@@ -1,3 +1,5 @@
+import axios from "axios";
+import BASE_API_URL from "./config";
 import sampleDataGetAll, { ParkingSpot } from "./sampledata";
 
 export function getSpotsData(isUsed: boolean): ParkingSpot[] {

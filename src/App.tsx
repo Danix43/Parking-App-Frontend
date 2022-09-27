@@ -18,10 +18,11 @@ import { ReactComponent as DeleteSpotLogo } from './theming/icons/delete_spot_ic
 
 import DefaultWindow from 'pages/DefaultWindow/DefaultWindow';
 import SeeUsedSpotsWindow from 'pages/SeeUsedSpotsWindow/SeeUsedSpotsWindow';
-import SeeAllSpotsWindow from 'pages/SeeAllSpotsWindow/SeeAllSpotsWindow';
+import SeeAllSpotsWindow from 'pages/SeeAllSpotsWindow/SeeAllSpotsWindows';
 import SeeSpotStatusWindow from 'pages/SeeSpotStatusWindow/SeeSpotStatusWindow';
 import AddNewSpotWindow from 'pages/AddNewSpotWindow/AddNewSpotWindow';
 import DeleteSpotWindow from 'pages/DeleteSpotWindow/DeleteSpotWindow';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
 const SidebarRoot = styled.div`
@@ -72,10 +73,16 @@ const ContentContainer = styled.div`
     background-color: ${props => props.theme.elevation1Color};
 `;
 
+const queryClient = new QueryClient();
 
 function App() {
+
     const [theme, toggleTheme, componentMounted] = useDarkMode();
     const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+    // TODO: move to individual components
+    // const [parkingData, setParkingData] = useExternalData();
+    // console.log(parkingData);
 
     const [currentContentWindow, setCurrentContentWindow] = useState(<DefaultWindow />);
 
@@ -131,7 +138,9 @@ function App() {
                 </ButtonContainer>
             </SidebarRoot >
             <ContentContainer theme={themeMode}>
-                {currentContentWindow}
+                <QueryClientProvider client={queryClient}>
+                    {currentContentWindow}
+                </QueryClientProvider>
             </ContentContainer>
         </ThemeProvider>
     );

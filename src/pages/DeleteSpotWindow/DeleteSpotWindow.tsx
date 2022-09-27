@@ -48,7 +48,6 @@ function DeleteSpotWindow() {
     const [spotId, setSpotId] = useState('');
 
     const displaySearchWindow = () => {
-
         return (
             <SearchContainer onSubmit={(e) => {
                 e.preventDefault();
