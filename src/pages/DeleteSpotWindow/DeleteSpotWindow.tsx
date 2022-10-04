@@ -1,8 +1,10 @@
+import { useMutation, useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import Button from "components/Button/Button";
 import LabelWithData from "components/LabelWithData/LabelWithData";
 import Map from "components/Map/Map";
 import Marker from "components/Map/MapMarkers/Marker";
-import { getSpotById } from "logic/handling";
+import BASE_API_URL from "logic/config";
 import { ParkingSpot } from "logic/sampledata";
 import { useState } from "react";
 import styled from "styled-components";
@@ -38,20 +40,33 @@ const DeleteButton = styled(Button)`
     background-color: red;
 `;
 
-function handleDelete(spotId: string): void {
-    console.log('spotId ', spotId);
-}
-
 // TODO: refactor code
 function DeleteSpotWindow() {
-    const [currentSpot, setCurrentSpot] = useState<ParkingSpot | null>(null);
+    const [currentSpot, setCurrentSpot] = useState<ParkingSpot>();
     const [spotId, setSpotId] = useState('');
+
+    const { data: spot } = useQuery<ParkingSpot>([`spotData`, spotId],
+        async () => {
+            console.log(`fetching from api`);
+            return axios.get(BASE_API_URL + `/parking/id/${spotId}`)
+                .then((res) => res.data)
+        }, {
+        enabled: !!spotId
+    })
+
+    const deleteMutation = useMutation(() => axios.delete(BASE_API_URL + `/parking/id/${spotId}/delete`), {
+        onSuccess: (data, variables, context) => {
+            setCurrentSpot(undefined)
+            setSpotId('')
+        }
+    }
+    );
 
     const displaySearchWindow = () => {
         return (
             <SearchContainer onSubmit={(e) => {
                 e.preventDefault();
-                setCurrentSpot(getSpotById(spotId));
+                setCurrentSpot(spot);
             }}>
                 <label>Enter the id of the parking spot:</label>
                 <input type="text" value={spotId} onChange={(event) => setSpotId(event.currentTarget.value)}></input>
@@ -83,7 +98,7 @@ function DeleteSpotWindow() {
                             } />
                         </MapContainer>
                     </div>
-                    <DeleteButton text="Delete" onClick={() => handleDelete(spotDetails.id)} img={null} />
+                    <DeleteButton text="Delete" onClick={() => deleteMutation.mutate()} img={null} />
                 </div>
             </>
         );
@@ -94,7 +109,7 @@ function DeleteSpotWindow() {
             <h1 style={{ textAlign: "center", paddingBottom: "20px", borderBottom: "3px solid white" }}>
                 Delete a spot!
             </h1>
-            {currentSpot === null ? displaySearchWindow() : displaySpotDetails(currentSpot)}
+            {currentSpot === undefined ? displaySearchWindow() : displaySpotDetails(currentSpot)}
         </BaseContainer>
     );
 }

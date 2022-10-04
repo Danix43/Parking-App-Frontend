@@ -1,8 +1,9 @@
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 import Map from 'components/Map/Map';
 import Marker from 'components/Map/MapMarkers/Marker';
 import TextInput from 'components/TextInput/TextInput';
-import { saveSpot } from 'logic/handling';
-import { ParkingSpot } from 'logic/sampledata';
+import BASE_API_URL from 'logic/config';
 import { MapLayerMouseEvent } from 'mapbox-gl';
 import React, { useState } from 'react'
 import styled from 'styled-components';
@@ -29,22 +30,27 @@ const RegisterButton = styled.button`
 
 `;
 
+type ParkingSpotDtoTypes = {
+    isUsed: boolean,
+    locationName: string,
+    longitude: number,
+    latitude: number
+}
+
 function AddNewSpotWindow() {
     const [coords, setCoords] = useState([0, 0]);
     const [marker, setMarker] = useState(<></>);
 
-    const handleSpotRegistration = (e: any) => {
-        e.preventDefault();
+    const saveMutation = useMutation(({ isUsed, locationName, longitude, latitude }: ParkingSpotDtoTypes) =>
+        axios.post(BASE_API_URL + '/parking/save', { isUsed, locationName, longitude, latitude }))
 
-        const spot: ParkingSpot = {
-            id: "23",
+    const handleSpotRegistration = () => {
+        saveMutation.mutate({
             isUsed: false,
-            locationName: "test",
+            locationName: "react test",
             longitude: coords[0],
             latitude: coords[1]
-        }
-
-        saveSpot(spot);
+        })
     }
 
     const addMarkerOnMap = (e: MapLayerMouseEvent) => {
@@ -61,7 +67,7 @@ function AddNewSpotWindow() {
     return (
         <BaseContainer onSubmit={(e) => {
             e.preventDefault()
-            handleSpotRegistration(e)
+            handleSpotRegistration()
         }}>
             <h1 style={{
                 textAlign: "center",

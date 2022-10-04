@@ -48,7 +48,7 @@ async function fetchAllSpots(): Promise<ParkingSpot[]> {
 }
 
 function SeeAllSpotsWindow() {
-  const { isLoading, error, data } = useQuery<ParkingSpot[]>(['parkingData'], fetchAllSpots, {
+  const { isLoading, error, data } = useQuery<ParkingSpot[]>(['parkingDataAll'], fetchAllSpots, {
     initialData: [
       {
         id: "1",
